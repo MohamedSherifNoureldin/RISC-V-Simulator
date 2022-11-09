@@ -4,18 +4,19 @@
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
+#include <stdlib.h>
 using namespace std;
 
 string registers[32];
 unordered_map<string, string> memory;
-unordered_map <string, int> conventional_registers;
+unordered_map <string, int> conventional_registers; // function that takes the name of the register and finds out if it is named conventianlly, if yes return the key to the number ot the register, if no return the number of the register
 
 void load_memory(string);
-void init_conventional_registers()
-void convert_register (string A, string B);
+void init_conventional_registers();
+int convert_register (string A);
 
 int main()
-{
+{   init_conventional_registers();
     string choice;
     cout<<"Welcome to RISC-V Simulator"<<endl;
 
@@ -34,6 +35,8 @@ int main()
     // initializing registers to zeros
     for(int i=0; i<32; i++)
         registers[i] = "00000000000000000000000000000000";
+        
+        
 }
 
 void load_memory(string file)
@@ -86,8 +89,31 @@ void init_conventional_registers(){
 
    
 };
-int convert_register (string A)// function that takes the name of the register and finds out if it is named conventianlly, if yes return the key to the number ot the register
+int convert_register (string A)
 {
+    if (conventional_registers.find(A)!=conventional_registers.end())
+    {
+        return conventional_registers[A];
+    }
+    else
+    {
 
+        string index_string="";
+       
+        for ( int i= 0; i< A.length(); i++)
+        {
+            if (isdigit(A[i]))
+            {
+                index_string+=A[i];
+               
+            }
+        }
+    return stoi (index_string);
+        }
+         
+  
 
-}
+        }
+    
+    
+
