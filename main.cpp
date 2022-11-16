@@ -1,14 +1,17 @@
-
+#include <iostream>
+#include <string>
+#include <vector>
+#include <unordered_map>
+#include <fstream>
+#include <sstream>
 #include "global.h"
 using namespace std;
 
-
+// function definitions 
 void load_memory(string);
-void init_conventional_registers();
 
 int main()
-{  
-    init_conventional_registers();
+{
     string choice;
     cout<<"Welcome to RISC-V Simulator"<<endl;
 
@@ -26,11 +29,7 @@ int main()
 
     // initializing registers to zeros
     for(int i=0; i<32; i++)
-        registers[i] = "00000000000000000000000000000000";
-
-       return 0;
-
-        
+        registers[i] = 0;
 }
 
 void load_memory(string file)
@@ -41,13 +40,9 @@ void load_memory(string file)
     if ( memory_file.is_open() ) {
         while ( memory_file ) {
             memory_file>>key; memory_file>>value;
-            memory[key] = value;
+            memory[stoi(key)] = stoi(value);
         }
     } else {
         cout<<"Error: Memory File couldn't be opened."<<endl;
     }
 }
-
-    
-    
-
