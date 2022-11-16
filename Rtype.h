@@ -4,7 +4,7 @@
 class Rtype
 {
    public:
-   static void ADD(int rd, int rs1, int rs2);
+    static void ADD(int rd, int rs1, int rs2);
     static void SUB(int rd, int rs1, int rs2);
     static void SLL(int rd, int rs1, int rs2);
     static void SLT(int rd, int rs1, int rs2);
