@@ -1,4 +1,7 @@
+#ifndef ITYPE_H
+#define ITYPE_H
 #include "global.h"
+using namespace std;
 
 class Itype
 {
@@ -19,3 +22,4 @@ public:
     static void SRLI(int rd, int rs1, int imm);
     static void SRAI(int rd, int rs1, int imm);
 };
+#endif
