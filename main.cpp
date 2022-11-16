@@ -4,14 +4,15 @@
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
-#include "global.h"
+#include "global.h" 
+#include "Rtype.h"
 using namespace std;
 
 // function definitions 
 void load_memory(string);
 
 int main()
-{
+{  
     string choice;
     cout<<"Welcome to RISC-V Simulator"<<endl;
 
@@ -30,6 +31,7 @@ int main()
     // initializing registers to zeros
     for(int i=0; i<32; i++)
         registers[i] = 0;
+
 }
 
 void load_memory(string file)
