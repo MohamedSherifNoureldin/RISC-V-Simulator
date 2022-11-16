@@ -1,3 +1,10 @@
+#ifndef BTYPE_H
+#define BTYPE_H
+
+#include "global.h"
+#include <string>
+using namespace std;
+
 class Btype
 {
 public:
@@ -8,3 +15,5 @@ public:
     static void BLTU(int rs1, int rs2, int imm);
     static void BGEU(int rs1, int rs2, int imm);
 };
+
+#endif
