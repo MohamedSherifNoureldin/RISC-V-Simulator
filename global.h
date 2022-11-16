@@ -3,9 +3,10 @@
 #include <unordered_map>
 using namespace std;
 
-string registers[32];
-unordered_map<string, string> memory;
+int registers[32];
+unordered_map<int, int> memory;
 unordered_map <string, int> conventional_registers; 
+int PC;
 
 void init_conventional_register() 
 {
