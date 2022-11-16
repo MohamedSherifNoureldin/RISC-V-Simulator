@@ -6,6 +6,7 @@ using namespace std;
 int registers[32];
 unordered_map<int, int> memory;
 unordered_map <string, int> conventional_registers; 
+unordered_map <string, int> labels;
 int PC;
 
 void init_conventional_register() 
