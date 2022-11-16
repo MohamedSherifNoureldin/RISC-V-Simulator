@@ -4,10 +4,8 @@
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
+#include "global.h"
 using namespace std;
-
-string registers[32];
-unordered_map<string, string> memory;
 
 // function definitions 
 void load_memory(string);
