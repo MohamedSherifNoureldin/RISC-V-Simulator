@@ -48,3 +48,4 @@ void load_memory(string file)
         cout<<"Error: Memory File couldn't be opened."<<endl;
     }
 }
+ 
