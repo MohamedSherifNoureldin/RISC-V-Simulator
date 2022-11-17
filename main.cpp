@@ -213,6 +213,67 @@ void parse_code(int address)
         rs2 = parse_register(line);
         Rtype::AND(rd, rs1, rs2);
     }
+    else if(opcode == "jalr")
+    {
+        //jalr rd, 0(rs1)
+        int rs1, rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs1 = parse_register(line);
+        Itype::JALR(rd, rs1, imm);
+    }
+    else if(opcode == "lb")
+    {
+        int rs1, rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs1 = parse_register(line);
+        Itype::LB(rd, rs1, imm);
+    }
+    else if(opcode == "lh")
+    {
+        int rs1, rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs1 = parse_register(line);
+        Itype::LH(rd, rs1, imm);
+    }
+    else if(opcode == "lw")
+    {
+        int rs1, rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs1 = parse_register(line);
+        Itype::LW(rd, rs1, imm);
+    }
+    else if(opcode == "lbu")
+    {
+        int rs1, rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs1 = parse_register(line);
+        Itype::LBU(rd, rs1, imm);
+    }
+    else if(opcode == "lhu")
+    {
+        int rs1, rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs1 = parse_register(line);
+        Itype::LHU(rd, rs1, imm);
+    }
     else if (opcode == "addi")
     {
         int rs1, rd;
@@ -312,4 +373,53 @@ void parse_code(int address)
         imm = stoi(line);
         Itype::SRAI(rd, rs1, imm);
     } 
+    else if (opcode == "sb")
+    {
+        //sb rs1, offset(rs2)
+        int rs1, rs2, imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs2 = parse_register(line);
+        Stype::SB(rs1, rs2, imm);
+    }
+    else if (opcode == "sh")
+    {
+        //sb rs1, offset(rs2)
+        int rs1, rs2, imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs2 = parse_register(line);
+        Stype::SH(rs1, rs2, imm);
+    }
+    else if (opcode == "sw")
+    {
+        //sb rs1, offset(rs2)
+        int rs1, rs2, imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1, line.find(')'));
+        rs2 = parse_register(line);
+        Stype::SW(rs1, rs2, imm);
+    }
+    else if (opcode == "lui")
+    {
+        int rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line);
+        Utype::LUI(rd, imm);
+    }
+    else if (opcode == "auipc")
+    {
+        int rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line);
+        Utype::AUIPC(rd, imm);
+    }
 }        
