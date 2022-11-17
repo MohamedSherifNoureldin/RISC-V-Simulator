@@ -7,7 +7,7 @@ int registers[32];
 unordered_map <int, char> memory;
 unordered_map <string, int> conventional_registers; 
 unordered_map <string, int> labels;
-map <int, string> instructions;
+unordered_map <int, string> instructions;
 int PC;
 
 void init_conventional_register() 

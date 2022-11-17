@@ -14,12 +14,14 @@ class Stype
 
 void Stype::SB(int rs1, int rs2, int imm)
 {
+    // sb rs1, imm(rs2)	
     char temp = (char)registers[rs1];
     memory[registers[rs2] + imm] = temp;
     PC += 4;
 }
 void Stype::SH(int rs1, int rs2, int imm)
 {
+    // sh rs1, imm(rs2)
     short int temp = (short int)registers[rs1];
     char lower = (char)temp;
     char upper = (char)temp >> 8;
@@ -29,6 +31,7 @@ void Stype::SH(int rs1, int rs2, int imm)
 }  
 void Stype::SW(int rs1, int rs2, int imm)
 {
+    // sw rs1, imm(rs2)
     int temp = registers[rs1];
     char lower = (char)temp;
     char upper = (char)temp >> 8;

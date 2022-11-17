@@ -4,7 +4,7 @@
 #include <unordered_map>
 #include <fstream>
 #include <sstream>
-#include <bits/stdc++.h>
+#include <algorithm>
 #include "global.h" 
 #include "Btype.cpp"
 #include "Itype.cpp"
@@ -311,5 +311,121 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SRAI(rd, rs1, imm);
-    } 
+    }
+    else if (opcode == "sb")
+    {
+        int rs1, rs2;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1);
+        rs2 = parse_register(line.substr(0, line.find(')')));
+        Stype::SB(rs1, rs2, imm);
+    }
+    else if (opcode == "sh")
+    {
+        int rs1, rs2;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1);
+        rs2 = parse_register(line.substr(0, line.find(')')));
+        Stype::SH(rs1, rs2, imm);
+    }
+    else if (opcode == "sw")
+    {
+        int rs1, rs2;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1);
+        rs2 = parse_register(line.substr(0, line.find(')')));
+        Stype::SW(rs1, rs2, imm);
+    }
+    else if (opcode == "lui")
+    {
+        int rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line);
+        Utype::LUI(rd, imm);
+    }
+    else if (opcode == "auipc")
+    {
+        int rd, imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        imm = stoi(line);
+        Utype::AUIPC(rd, imm);
+    }
+    else if (opcode == "jal")
+    {
+        // does jal only take a label and never a register with offset?
+        // harage3ha dy
+        string label;
+        int rd;
+        int imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        label = line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Jtype::JAL(rd, imm);
+     }
+    else if (opcode == "jalr")
+    {
+        // does jalr take a label or justa  register with offset??
+        int rd, rs1; string label;
+        int imm;
+        rd = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        if (line.find_first_of('(') != string::npos)
+        {
+            imm = stoi(line.substr(0, line.find('(')));
+            line = line.substr(line.find('(')+1);
+            rs1 = parse_register(line.substr(0, line.find(')')));
+            Itype::JALR(rd, rs1, imm);
+        }
+        else
+        {
+            label = line.substr(line.find(',')+1);
+            imm = labels[label] - PC;
+            Itype::JALR(rd, rs1, imm);
+        }
+    }
+    // else if (opcode == "beq")
+    // {
+    //     int rs1, rs2;
+    //     int imm;
+    //     rs1 = parse_register(line.substr(0, line.find(',')));
+    //     line = line.substr(line.find(',')+1);
+    //     rs2 = parse_register(line.substr(0, line.find(',')));
+    //     line = line.substr(line.find(',')+1);
+    //     imm = stoi(line);
+    //     Btype::BEQ(rs1, rs2, imm);
+    // }
+    // else if (opcode == "bne")
+    // {
+    //     int rs1, rs2;
+    //     int imm;
+    //     rs1 = parse_register(line.substr(0, line.find(',')));
+    //     line = line.substr(line.find(',')+1);
+    //     rs2 = parse_register(line.substr(0, line.find(',')));
+    //     line = line.substr(line.find(',')+1);
+    //     imm = stoi(line);
+    //     Btype::BNE(rs1, rs2, imm);
+    // }
+    // else if (opcode == "blt")
+    // {
+    //     int rs1, rs2;
+    //     int imm;
+    //     rs1 = parse_register(line.substr(0, line.find(',')));
+    //     line = line.substr(line.find(',')+1);
+    //     rs2 = parse_register(line.substr(0, line.find(',')));
+    //     line = line.substr(line.find(',')+1);
+    //     imm = stoi(line);
+    //     Btype::BLT(rs1, rs2, imm);
+    // }
+
 }        
