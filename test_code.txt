@@ -1,3 +1,9 @@
-addi x1, x0, -1
-addi x2, zero, 5
-add x3, x1, x2
+addi t0, zero, 1
+addi t1, zero, 100
+sw t0, 0(t1)
+add t0, t0, t0 #t0 = 2(1)
+#sw t0, 4(t1)
+#add t0, t0, t0
+# useless line
+sw t0, 8(t1)
+lw t3, 8(t1)

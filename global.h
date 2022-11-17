@@ -1,10 +1,11 @@
 #pragma once
 #include <string>
 #include <unordered_map>
+#include <map>
 using namespace std;
 
 int registers[32];
-unordered_map <int, char> memory;
+map <int, char> memory;
 unordered_map <string, int> conventional_registers; 
 unordered_map <string, int> labels;
 map <int, string> instructions;
@@ -75,7 +76,7 @@ void print_memory()
 {
     for(auto i: memory)
     {
-        cout<<i.first<<" = "<<i.second<<", "<<endl;
+        cout<<i.first<<" = "<<(int)(i.second)<<", "<<endl;
     }
 }
 
