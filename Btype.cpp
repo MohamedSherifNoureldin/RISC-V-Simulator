@@ -1,7 +1,21 @@
-# include "Btype.h"
-# include "global.h"
+#pragma once
+#ifndef BTYPE_CPP
+#define BTYPE_CPP
+
+#include "global.h"
 #include <string>
 using namespace std;
+
+class Btype
+{
+public:
+    static void BEQ(int rs1, int rs2, int imm);
+    static void BNE(int rs1, int rs2, int imm);
+    static void BLT(int rs1, int rs2, int imm);
+    static void BGE(int rs1, int rs2, int imm);
+    static void BLTU(int rs1, int rs2, int imm);
+    static void BGEU(int rs1, int rs2, int imm);
+};
 
 void Btype::BEQ(int rs1, int rs2, int imm)
 {
@@ -49,4 +63,4 @@ void Btype::BGEU(int rs1, int rs2, int imm)
         PC = PC + imm;
 }
 
-// Path: Btype.h
+#endif

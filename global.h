@@ -4,9 +4,10 @@
 using namespace std;
 
 int registers[32];
-unordered_map<int, char> memory;
+unordered_map <int, char> memory;
 unordered_map <string, int> conventional_registers; 
 unordered_map <string, int> labels;
+map <int, string> instructions;
 int PC;
 
 void init_conventional_register() 
@@ -47,8 +48,9 @@ void init_conventional_register()
 
 int parse_register(string reg)
 {
-    if(reg[0]=='x') {
-        reg = reg.substr(1);
+    if(reg.find('x') != std::string::npos) {
+        int i = reg.find('x');
+        reg = reg.substr(i+1);
         return stoi(reg);
     }
     else if (conventional_registers.find(reg)!=conventional_registers.end()) {
@@ -56,4 +58,30 @@ int parse_register(string reg)
     } else {
         return -1;
     }
+}
+
+void print_registers()
+{
+    for(int i=0; i<32; i++)
+    {
+        cout<<"x"<<i<<" = "<<registers[i];
+        if(i<31)
+            cout<<", ";
+    }
+    cout<<endl;
+}
+
+void print_memory()
+{
+    for(auto i: memory)
+    {
+        cout<<i.first<<" = "<<i.second<<", "<<endl;
+    }
+}
+
+void print_updates()
+{
+    cout<<"PC = "<<PC<<endl;
+    print_registers();
+    print_memory();
 }
