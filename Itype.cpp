@@ -21,6 +21,7 @@ public:
     static void SLLI(int rd, int rs1, int imm);
     static void SRLI(int rd, int rs1, int imm);
     static void SRAI(int rd, int rs1, int imm);
+    static void print_Itype_machine_code(int opcode, int rd, int funct3, int rs1, int imm);
 };
 
 void Itype::JALR(int rd, int rs1, int imm)
@@ -148,4 +149,21 @@ void Itype::SRAI(int rd, int rs1, int imm)
     registers[rd] = registers[rs1] >> imm;
     PC += 4;
 }
+void Itype:: print_Itype_machine_code(int opcode, int rd, int funct3, int rs1, int imm)
+{
+    int machine_code = (imm<<20) + (rs1<<15) + (funct3<<12) + (rd<<7) + opcode;
+     cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
+string binary_codee1=convert_to_binary(machine_code, 32).substr(0,8);
+string binary_codee2=convert_to_binary(machine_code, 32).substr(8,8);
+string binary_codee3=convert_to_binary(machine_code, 32).substr(16,8);
+string binary_codee4=convert_to_binary(machine_code, 32).substr(24,8);
+
+
+
+instructions_code.insert({PC-4, binary_codee4});
+instructions_code.insert({PC-3, binary_codee3});
+instructions_code.insert({PC-2, binary_codee2});
+instructions_code.insert({PC-1, binary_codee1});
+}
+
 #endif

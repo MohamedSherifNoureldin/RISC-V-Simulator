@@ -9,8 +9,18 @@ map <int, char> memory;
 unordered_map <string, int> conventional_registers; 
 unordered_map <string, int> labels;
 map <int, string> instructions;
+map <int, string> instructions_code;
 int PC;
-
+string convert_to_binary(int n, int bits){
+    string s = "";
+    while(n){
+        s = (n%2==0 ? "0" : "1") + s;
+        n /= 2;
+    }
+    while(s.length() < bits)
+        s = "0" + s;
+    return s;
+}
 void init_conventional_register() 
 {
     conventional_registers["zero"]= 0;

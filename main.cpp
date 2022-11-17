@@ -116,7 +116,6 @@ void load_code(string file, int start_pos)
         cout<<"Error: Code File couldn't be opened."<<endl;
     }
 }  
-
 void parse_code(int address) 
 {
     string line = instructions[address];
@@ -138,6 +137,7 @@ void parse_code(int address)
         rs2 = parse_register(temp);
         cout<<"add "<<rd<<", "<<rs1<<", "<<rs2<<endl;
         Rtype::ADD(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 0, rs1, rs2, 0);
     }
     else if (opcode == "sub")
     {
@@ -152,6 +152,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);        
         Rtype::SUB(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 0, rs1, rs2, 32);
     } 
     else if (opcode == "sll")
     {
@@ -166,6 +167,8 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::SLL(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 1, rs1, rs2, 0);
+
     }
     else if (opcode == "slt")
     {
@@ -175,11 +178,12 @@ void parse_code(int address)
         rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
         line = line.substr(line.find(',')+1);
         string temp = "";
-        for(int i=0; i<line.length(); i++)
+        for(int i=0; i<line.length(); i++){
             if(isalnum(line[i]))
-                temp += line[i];
+                temp += line[i];}
         rs2 = parse_register(temp);  
         Rtype::SLT(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 2, rs1, rs2, 0);
     }
     else if (opcode == "sltu")
     {
@@ -194,6 +198,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::SLTU(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 3, rs1, rs2, 0);
     }
     else if (opcode == "xor")
     {
@@ -208,6 +213,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::XOR(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 4, rs1, rs2, 0);
     }
     else if (opcode == "srl")
     {
@@ -222,6 +228,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::SRL(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 5, rs1, rs2, 0);
     }
     else if (opcode == "sra")
     {
@@ -236,6 +243,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::SRA(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 5, rs1, rs2, 32);
     }
     else if (opcode == "or")
     {
@@ -250,6 +258,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::OR(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 6, rs1, rs2, 0);
     }
     else if (opcode == "and")
     {
@@ -264,6 +273,7 @@ void parse_code(int address)
                 temp += line[i];
         rs2 = parse_register(temp);  
         Rtype::AND(rd, rs1, rs2);
+        Rtype:: print_Rtype_machine_code (51, rd, 7, rs1, rs2, 0);
     }
     else if(opcode == "jalr")
     {
@@ -275,6 +285,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1, line.find(')'));
         rs1 = parse_register(line);
         Itype::JALR(rd, rs1, imm);
+        Itype::print_Itype_machine_code(103, rd, 0, rs1, imm);
     }
     else if(opcode == "lb")
     {
@@ -285,6 +296,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1, line.find(')'));
         rs1 = parse_register(line);
         Itype::LB(rd, rs1, imm);
+        Itype::print_Itype_machine_code(3, rd, 0, rs1, imm);
     }
     else if(opcode == "lh")
     {
@@ -295,6 +307,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1, line.find(')'));
         rs1 = parse_register(line);
         Itype::LH(rd, rs1, imm);
+        Itype::print_Itype_machine_code(3, rd, 1, rs1, imm);
     }
     else if(opcode == "lw")
     {
@@ -307,6 +320,7 @@ void parse_code(int address)
         rs1 = parse_register(line);
         Itype::LW(rd, rs1, imm);
         cout<<"lw "<<rd<<", "<<imm<<"("<<rs1<<")"<<endl;
+        Itype::print_Itype_machine_code(3, rd, 2, rs1, imm);
     }
     else if(opcode == "lbu")
     {
@@ -317,6 +331,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1, line.find(')'));
         rs1 = parse_register(line);
         Itype::LBU(rd, rs1, imm);
+
     }
     else if(opcode == "lhu")
     {
@@ -327,6 +342,8 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1, line.find(')'));
         rs1 = parse_register(line);
         Itype::LHU(rd, rs1, imm);
+        Itype:: print_Itype_machine_code (3, rd, 3, rs1, imm);
+
     }
     else if (opcode == "addi")
     {
@@ -339,6 +356,7 @@ void parse_code(int address)
         imm = stoi(line);
         cout<<"addi "<<rd<<", "<<rs1<<", "<<imm<<endl;
         Itype::ADDI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 0, rs1, imm);
     }
     else if (opcode == "slti")
     {
@@ -350,6 +368,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SLTI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 2, rs1, imm);
     } 
     else if (opcode == "sltiu")
     {
@@ -361,6 +380,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SLTIU(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 3, rs1, imm);
     } 
     else if (opcode == "xori")
     {
@@ -372,6 +392,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::XORI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 4, rs1, imm);
     } 
     else if (opcode == "ori")
     {
@@ -383,6 +404,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::ORI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 6, rs1, imm);
     } 
     else if (opcode == "andi")
     {
@@ -394,6 +416,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::ANDI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 7, rs1, imm);
     } 
     else if (opcode == "slli")
     {
@@ -405,6 +428,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SLLI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 1, rs1, imm);
     } 
     else if (opcode == "srli")
     {
@@ -416,6 +440,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SRLI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 5, rs1, imm);
     } 
     else if (opcode == "srai")
     {
@@ -427,6 +452,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SRAI(rd, rs1, imm);
+        Itype::print_Itype_machine_code(19, rd, 5, rs1, imm);
     }
     else if (opcode == "sb")
     {
@@ -438,6 +464,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(')')));
         Stype::SB(rs1, rs2, imm);
+        Stype::print_Stype_machine_code(35, 0, rs1, rs2, imm);
     }
     else if (opcode == "sh")
     {
@@ -449,6 +476,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(')')));
         Stype::SH(rs1, rs2, imm);
+        Stype::print_Stype_machine_code(35, 1, rs1, rs2, imm);
     }
     else if (opcode == "sw")
     {
@@ -460,6 +488,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(')')));
         Stype::SW(rs1, rs2, imm);
+        Stype::print_Stype_machine_code(35, 2, rs1, rs2, imm);
     }
     else if (opcode == "lui")
     {
@@ -468,6 +497,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Utype::LUI(rd, imm);
+        Utype::print_Utype_machine_code(55, rd, imm);
     }
     else if (opcode == "auipc")
     {
@@ -476,6 +506,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Utype::AUIPC(rd, imm);
+        Utype::print_Utype_machine_code(23, rd, imm);
     }
     else if (opcode == "jal")
     {
@@ -486,6 +517,8 @@ void parse_code(int address)
         label = line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Jtype::JAL(rd, imm);
+        Jtype::print_Jtype_machine_code(111, rd, imm);
+
      }
     else if (opcode == "jalr")
     {
@@ -497,6 +530,7 @@ void parse_code(int address)
         line = line.substr(line.find('(')+1);
         rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(')')));
         Itype::JALR(rd, rs1, imm);
+        Itype::print_Itype_machine_code(111, rd, 0, rs1, imm);
     }
     else if (opcode == "beq")
     {
@@ -509,6 +543,7 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BEQ(rs1, rs2, imm);
+        
     }
     else if (opcode == "bne")
     {
@@ -570,4 +605,8 @@ void parse_code(int address)
         imm = labels[label] - PC;
         Btype::BGEU(rs1, rs2, imm);
     }
+
+
+
+
 }        

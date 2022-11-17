@@ -7,6 +7,7 @@
 class Rtype
 {
    public:
+    int rd, rs1, rs2, funct3, funct7;
     static void ADD(int rd, int rs1, int rs2);
     static void SUB(int rd, int rs1, int rs2);
     static void SLL(int rd, int rs1, int rs2);
@@ -17,7 +18,9 @@ class Rtype
     static void SRA(int rd, int rs1, int rs2);
     static void OR(int rd, int rs1, int rs2);
     static void AND(int rd, int rs1, int rs2);
+    static void print_Rtype_machine_code(int opcode, int rd, int funct3, int rs1, int rs2, int funct7);
 };
+
 
 void Rtype::ADD(int rd, int rs1, int rs2)
 {
@@ -69,5 +72,37 @@ void Rtype::AND(int rd, int rs1, int rs2)
     registers[rd] = registers[rs1] & registers[rs2];
     PC += 4;
 }
+void Rtype::print_Rtype_machine_code(int opcode, int rd, int funct3, int rs1, int rs2, int funct7)
+{
+    // to print the code of the R type instruction in binary
+    //cout << convert_to_binary(funct7, 7) << " " << convert_to_binary(rs2, 5) << " " << convert_to_binary(rs1, 5) << " " << convert_to_binary(funct3, 3) << " " << convert_to_binary(rd, 5) << " " << convert_to_binary(opcode, 7) << endl;
+
+       // to calculate the machine code of the R type instruction in decimal
+    int machine_code = (funct7 << 25) + (rs2 << 20) + (rs1 << 15) + (funct3 << 12) + (rd << 7) + opcode;
+    cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
+string binary_codee1=convert_to_binary(machine_code, 32).substr(0,8);
+string binary_codee2=convert_to_binary(machine_code, 32).substr(8,8);
+string binary_codee3=convert_to_binary(machine_code, 32).substr(16,8);
+string binary_codee4=convert_to_binary(machine_code, 32).substr(24,8);
+
+
+
+instructions_code.insert({PC-4, binary_codee4});
+instructions_code.insert({PC-3, binary_codee3});
+instructions_code.insert({PC-2, binary_codee2});
+instructions_code.insert({PC-1, binary_codee1});
+}
+
+
+
+
+
+
+  
+
+
+
+
+
 
 #endif

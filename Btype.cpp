@@ -15,6 +15,7 @@ public:
     static void BGE(int rs1, int rs2, int imm);
     static void BLTU(int rs1, int rs2, int imm);
     static void BGEU(int rs1, int rs2, int imm);
+    static void print_Btype_machine_code(int opcode, int rs1, int rs2, int funct3, int imm);
 };
 
 void Btype::BEQ(int rs1, int rs2, int imm)
@@ -62,5 +63,8 @@ void Btype::BGEU(int rs1, int rs2, int imm)
     if (temp1 >= temp2)
         PC = PC + imm;
 }
+void Btype::print_Btype_machine_code(int opcode, int rs1, int rs2, int funct3, int imm)
+{
 
+}
 #endif
