@@ -25,7 +25,7 @@ public:
 
 void Itype::JALR(int rd, int rs1, int imm)
 {
-    // jalr ra, 0(rd)
+    // jalr rd, imm(rs1)
     PC = registers[rs1] + imm;
     registers[rd] = PC + 4;
 }

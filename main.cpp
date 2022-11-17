@@ -363,8 +363,6 @@ void parse_code(int address)
     }
     else if (opcode == "jal")
     {
-        // does jal only take a label and never a register with offset?
-        // harage3ha dy
         string label;
         int rd;
         int imm;
@@ -375,57 +373,84 @@ void parse_code(int address)
      }
     else if (opcode == "jalr")
     {
-        // does jalr take a label or justa  register with offset??
         int rd, rs1; string label;
         int imm;
         rd = parse_register(line.substr(0, line.find(',')));
         line = line.substr(line.find(',')+1);
-        if (line.find_first_of('(') != string::npos)
-        {
-            imm = stoi(line.substr(0, line.find('(')));
-            line = line.substr(line.find('(')+1);
-            rs1 = parse_register(line.substr(0, line.find(')')));
-            Itype::JALR(rd, rs1, imm);
-        }
-        else
-        {
-            label = line.substr(line.find(',')+1);
-            imm = labels[label] - PC;
-            Itype::JALR(rd, rs1, imm);
-        }
+        imm = stoi(line.substr(0, line.find('(')));
+        line = line.substr(line.find('(')+1);
+        rs1 = parse_register(line.substr(0, line.find(')')));
+        Itype::JALR(rd, rs1, imm);
     }
-    // else if (opcode == "beq")
-    // {
-    //     int rs1, rs2;
-    //     int imm;
-    //     rs1 = parse_register(line.substr(0, line.find(',')));
-    //     line = line.substr(line.find(',')+1);
-    //     rs2 = parse_register(line.substr(0, line.find(',')));
-    //     line = line.substr(line.find(',')+1);
-    //     imm = stoi(line);
-    //     Btype::BEQ(rs1, rs2, imm);
-    // }
-    // else if (opcode == "bne")
-    // {
-    //     int rs1, rs2;
-    //     int imm;
-    //     rs1 = parse_register(line.substr(0, line.find(',')));
-    //     line = line.substr(line.find(',')+1);
-    //     rs2 = parse_register(line.substr(0, line.find(',')));
-    //     line = line.substr(line.find(',')+1);
-    //     imm = stoi(line);
-    //     Btype::BNE(rs1, rs2, imm);
-    // }
-    // else if (opcode == "blt")
-    // {
-    //     int rs1, rs2;
-    //     int imm;
-    //     rs1 = parse_register(line.substr(0, line.find(',')));
-    //     line = line.substr(line.find(',')+1);
-    //     rs2 = parse_register(line.substr(0, line.find(',')));
-    //     line = line.substr(line.find(',')+1);
-    //     imm = stoi(line);
-    //     Btype::BLT(rs1, rs2, imm);
-    // }
-
+    else if (opcode == "beq")
+    {
+        int rs1, rs2;
+        string label;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        rs2 = parse_register(line.substr(0, line.find(',')));
+        label =line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Btype::BEQ(rs1, rs2, imm);
+    }
+    else if (opcode == "bne")
+    {
+        int rs1, rs2;
+        string label;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        rs2 = parse_register(line.substr(0, line.find(',')));
+        label =line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Btype::BNE(rs1, rs2, imm);
+    }
+    else if (opcode == "blt")
+    {
+        int rs1, rs2;
+        string label;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        rs2 = parse_register(line.substr(0, line.find(',')));
+        label =line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Btype::BLT(rs1, rs2, imm);
+    }
+    else if (opcode == "bge")
+    {
+        int rs1, rs2;
+        string label;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        rs2 = parse_register(line.substr(0, line.find(',')));
+        label =line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Btype::BGE(rs1, rs2, imm);
+    }
+    else if (opcode == "bltu")
+    {
+        int rs1, rs2;
+        string label;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        rs2 = parse_register(line.substr(0, line.find(',')));
+        label =line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Btype::BLTU(rs1, rs2, imm);
+    }
+    else if (opcode == "bgeu")
+    {
+        int rs1, rs2;
+        string label;
+        int imm;
+        rs1 = parse_register(line.substr(0, line.find(',')));
+        line = line.substr(line.find(',')+1);
+        rs2 = parse_register(line.substr(0, line.find(',')));
+        label =line.substr(line.find(',')+1);
+        imm = labels[label] - PC;
+        Btype::BGEU(rs1, rs2, imm);
 }        
