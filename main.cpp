@@ -47,7 +47,7 @@ int main()
         cin>>choice;
         load_memory(choice);
         for (auto i : memory)
-            cout << i.first << " -> " << i.second<< endl;
+            cout << i.first << " -> " << (int)i.second<< endl;
     }
 
     // initializing registers to zeros
