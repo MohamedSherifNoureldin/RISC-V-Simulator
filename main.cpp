@@ -543,7 +543,8 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BEQ(rs1, rs2, imm);
-        
+        Btype::print_Btype_machine_code(99, rs1,rs2,0,imm);
+
     }
     else if (opcode == "bne")
     {
@@ -556,6 +557,7 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BNE(rs1, rs2, imm);
+        Btype::print_Btype_machine_code(99, rs1,rs2,1,imm);
     }
     else if (opcode == "blt")
     {
@@ -568,6 +570,7 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BLT(rs1, rs2, imm);
+        Btype:: print_Btype_machine_code(99,rs1,rs2,4,imm);
     }
     else if (opcode == "bge")
     {
@@ -580,6 +583,7 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BGE(rs1, rs2, imm);
+        Btype:: print_Btype_machine_code(99,rs1,rs2,5,imm);
     }
     else if (opcode == "bltu")
     {
@@ -592,6 +596,7 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BLTU(rs1, rs2, imm);
+        Btype:: print_Btype_machine_code(99, rs1, rs2,6, imm);
     }
     else if (opcode == "bgeu")
     {
@@ -604,6 +609,7 @@ void parse_code(int address)
         label =line.substr(line.find(',')+1);
         imm = labels[label] - PC;
         Btype::BGEU(rs1, rs2, imm);
+        Btype:: print_Btype_machine_code(99, rs1, rs2, 7,imm);
     }
 
 
