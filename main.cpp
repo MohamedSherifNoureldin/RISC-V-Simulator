@@ -47,7 +47,10 @@ int main()
         cin>>choice;
         load_memory(choice);
         for (auto i : memory)
-            cout << i.first << " -> " << (int)i.second<< endl;
+            cout << i.first << " -> " << (int)i.second << endl;
+
+        for (auto i : labels)
+            cout << i.first << " -> " << (int)i.second << endl;
     }
 
     // initializing registers to zeros
@@ -515,7 +518,10 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label = line.substr(line.find(',')+1);
+        label = label.substr(label.find_first_not_of(' '));
+        label = label.substr(0, label.find(' '));
         imm = labels[label] - PC;
+        cout << PC << "--------------" << labels[label] <<"---------------------------------" << imm << endl;
         Jtype::JAL(rd, imm);
         Jtype::print_Jtype_machine_code(111, rd, imm);
 

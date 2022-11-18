@@ -1,5 +1,6 @@
 addi t1, t1, 256
 addi t2, t2, 1
+jal ra, jlabel
 sh t1, 100(t2)
-slt x2, t1, t2
-sltu x2, t2, t1
+jlabel: addi x2, t1, 3
+slt x2, t2, t1
