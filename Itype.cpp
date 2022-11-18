@@ -2,6 +2,8 @@
 #ifndef ITYPE_CPP
 #define ITYPE_CPP
 #include "global.h"
+#include <iostream>
+using namespace std;
 
 class Itype
 {
