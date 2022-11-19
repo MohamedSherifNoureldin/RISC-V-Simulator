@@ -48,9 +48,6 @@ int main()
         load_memory(choice);
         for (auto i : memory)
             cout << i.first << " -> " << (int)i.second << endl;
-
-        for (auto i : labels)
-            cout << i.first << " -> " << (int)i.second << endl;
     }
 
     // initializing registers to zeros
@@ -63,6 +60,7 @@ int main()
     }
 
     cout<<endl;
+
 
     // parse code
     while(instructions.find(PC)!=instructions.end())
@@ -107,6 +105,7 @@ void load_code(string file, int start_pos)
                 if (line.find(':') != string::npos)
                 {
                     // if line contains label
+                    line = line.substr(find_first_alphanum(line));
                     string label = line.substr(0, line.find(':'));
                     labels.insert(pair<string, int>(label, start_pos));
                     line = line.substr(line.find(':')+1);
@@ -119,6 +118,7 @@ void load_code(string file, int start_pos)
                 }
                 else
                 {
+                    line = line.substr(find_first_alphanum(line));
                     instructions.insert(pair<int, string>(start_pos, line));
                     start_pos += 4;
                 }
@@ -533,6 +533,7 @@ void parse_code(int address)
         label = line.substr(line.find(',')+1);
         label = label.substr(label.find_first_not_of(' '));
         label = label.substr(0, label.find(' '));
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Jtype::JAL(rd, imm);
         Jtype::print_Jtype_machine_code(111, rd, imm);
@@ -559,6 +560,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label =line.substr(line.find(',')+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Btype::BEQ(rs1, rs2, imm);
         Btype::print_Btype_machine_code(99, rs1,rs2,0,imm);
@@ -573,6 +575,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label =line.substr(line.find(',')+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Btype::BNE(rs1, rs2, imm);
         Btype::print_Btype_machine_code(99, rs1,rs2,1,imm);
@@ -586,6 +589,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label =line.substr(line.find(',')+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Btype::BLT(rs1, rs2, imm);
         Btype:: print_Btype_machine_code(99,rs1,rs2,4,imm);
@@ -599,6 +603,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label =line.substr(line.find(',')+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Btype::BGE(rs1, rs2, imm);
         Btype:: print_Btype_machine_code(99,rs1,rs2,5,imm);
@@ -612,6 +617,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label =line.substr(line.find(',')+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Btype::BLTU(rs1, rs2, imm);
         Btype:: print_Btype_machine_code(99, rs1, rs2,6, imm);
@@ -625,6 +631,7 @@ void parse_code(int address)
         line = line.substr(line.find(',')+1);
         rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         label =line.substr(line.find(',')+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
         imm = labels[label] - PC;
         Btype::BGEU(rs1, rs2, imm);
         Btype:: print_Btype_machine_code(99, rs1, rs2, 7,imm);

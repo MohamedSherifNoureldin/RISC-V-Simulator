@@ -191,6 +191,16 @@ int find_first_alphanum(string s)
     return -1;
 }
 
+int find_last_alphanum(string s)
+{
+    for(int i=s.length()-1; i>=0; i--)
+    {
+        if(isalnum(s[i]))
+            return i;
+    }
+    return -1;
+}
+
 void update_register(int dest_reg, int value)
 {
     if(dest_reg!=0)
