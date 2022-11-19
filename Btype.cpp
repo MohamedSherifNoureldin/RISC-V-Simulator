@@ -23,6 +23,8 @@ void Btype::BEQ(int rs1, int rs2, int imm)
     // beq rs1, rs2, imm
     if(registers[rs1]==registers[rs2])
         PC = PC + imm;
+    else
+        PC += 4;
 }
 
 void Btype::BNE(int rs1, int rs2, int imm)
@@ -30,6 +32,8 @@ void Btype::BNE(int rs1, int rs2, int imm)
     //bne rs1, rs2, imm
     if(registers[rs1]!=registers[rs2])
         PC = PC + imm;
+    else
+        PC += 4;
 }
 
 void Btype::BLT(int rs1, int rs2, int imm)
@@ -37,6 +41,8 @@ void Btype::BLT(int rs1, int rs2, int imm)
     //blt rs1, rs2, imm
     if(registers[rs1]<registers[rs2])
         PC = PC + imm;
+    else
+        PC += 4;
 }
 
 void Btype::BGE(int rs1, int rs2, int imm)
@@ -44,6 +50,8 @@ void Btype::BGE(int rs1, int rs2, int imm)
     //bge rs1, rs2, imm
     if(registers[rs1]>=registers[rs2])
         PC = PC + imm;
+    else
+        PC += 4;
 }
 
 void Btype::BLTU(int rs1, int rs2, int imm)
@@ -53,6 +61,8 @@ void Btype::BLTU(int rs1, int rs2, int imm)
     uint32_t temp2 = registers[rs2]; 
     if (temp1 < temp2)
         PC = PC + imm;
+    else
+        PC += 4;
 }
 
 void Btype::BGEU(int rs1, int rs2, int imm)
@@ -62,6 +72,8 @@ void Btype::BGEU(int rs1, int rs2, int imm)
     uint32_t temp2 = registers[rs2];    
     if (temp1 >= temp2)
         PC = PC + imm;
+    else
+        PC += 4;
 }
 void Btype::print_Btype_machine_code(int opcode, int rs1, int rs2, int funct3, int imm)
 {
@@ -70,7 +82,7 @@ void Btype::print_Btype_machine_code(int opcode, int rs1, int rs2, int funct3, i
     int third_imm= stoi(convert_to_binary(imm,12).substr(1,4));
     int fourth_imm= stoi(convert_to_binary(imm,12).substr(11,1));
     int machine_code = (first_imm<<31) | (second_imm<<25) | (third_imm<<8) | (rs2<<20) | (rs1<<15) | (funct3<<12) | (fourth_imm<<7) | opcode;
-    
+
     cout<<"Machine code: "<<convert_to_binary(machine_code,32)<<endl;
     
     char lower = (char)machine_code;

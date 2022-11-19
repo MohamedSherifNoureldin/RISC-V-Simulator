@@ -363,9 +363,13 @@ void parse_code(int address)
         int rs1, rd;
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
+        cout<<rd<<endl;
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        cout<<line<<endl;
+        cout<<line.substr(line.find_first_not_of(' '), line.find(',')-1)<<endl;
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
+        cout<<line<<endl;
         imm = stoi(line);
         Itype::ADDI(rd, rs1, imm);
         Itype::print_Itype_machine_code(19, rd, 0, rs1, imm);
@@ -376,7 +380,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SLTI(rd, rs1, imm);
@@ -388,7 +392,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SLTIU(rd, rs1, imm);
@@ -400,7 +404,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::XORI(rd, rs1, imm);
@@ -412,7 +416,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::ORI(rd, rs1, imm);
@@ -424,7 +428,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::ANDI(rd, rs1, imm);
@@ -436,7 +440,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SLLI(rd, rs1, imm);
@@ -448,7 +452,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SRLI(rd, rs1, imm);
@@ -460,7 +464,7 @@ void parse_code(int address)
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
         Itype::SRAI(rd, rs1, imm);
