@@ -14,7 +14,7 @@ class Utype
 void Utype::LUI(int rd, int imm)
 {
     // lui rd, imm
-    registers[rd] = imm << 12;
+    update_register(rd, imm << 12);
     PC += 4;
 }
 
@@ -22,7 +22,7 @@ void Utype::AUIPC(int rd, int imm)
 {
     // auipc rd, imm
     imm = imm << 12;
-    registers[rd] = PC + imm;
+    update_register(rd, PC + imm);
     PC += 4;
 }
 void Utype::print_Utype_machine_code(int opcode, int rd, int imm)
@@ -30,7 +30,7 @@ void Utype::print_Utype_machine_code(int opcode, int rd, int imm)
     int machine_code = (imm<<12) | (rd<<7) | opcode;
 
     cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
-    
+
     char lower = (char)machine_code;
     char upper = (char)(machine_code >> 8);
     char upper2 = (char)(machine_code >> 16);

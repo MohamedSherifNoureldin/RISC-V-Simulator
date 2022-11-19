@@ -24,52 +24,52 @@ class Rtype
 
 void Rtype::ADD(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] + registers[rs2];
+    update_register(rd, registers[rs1] + registers[rs2]);
     PC += 4;
 }
 void Rtype::SUB(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] - registers[rs2];
+    update_register(rd, registers[rs1] - registers[rs2]);
     PC += 4;
 }
 void Rtype::SLL(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] << registers[rs2];
+    update_register(rd, registers[rs1] << registers[rs2]);
     PC += 4;
 }
 void Rtype::SLT(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] < registers[rs2];
+    update_register(rd, registers[rs1] < registers[rs2]);
     PC += 4;
 }
 void Rtype::SLTU(int rd, int rs1, int rs2)
 {
-    registers[rd] = (unsigned int)registers[rs1] < (unsigned int)registers[rs2];
+    update_register(rd, (unsigned int)registers[rs1] < (unsigned int)registers[rs2]);
     PC += 4;
 }
 void Rtype::XOR(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] ^ registers[rs2];
+    update_register(rd, registers[rs1] ^ registers[rs2]);
     PC += 4;
 }
 void Rtype::SRL(int rd, int rs1, int rs2)
 {
-    registers[rd] = (unsigned int)registers[rs1] >> registers[rs2];
+    update_register(rd, (unsigned int)registers[rs1] >> registers[rs2]);
     PC += 4;
 }
 void Rtype::SRA(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] >> registers[rs2];
+    update_register(rd, registers[rs1] >> registers[rs2]);
     PC += 4;
 }
 void Rtype::OR(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] | registers[rs2];
+    update_register(rd, registers[rs1] | registers[rs2]);
     PC += 4;
 }
 void Rtype::AND(int rd, int rs1, int rs2)
 {
-    registers[rd] = registers[rs1] & registers[rs2];
+    update_register(rd, registers[rs1] & registers[rs2]);
     PC += 4;
 }
 void Rtype::print_Rtype_machine_code(int opcode, int rd, int funct3, int rs1, int rs2, int funct7)
@@ -81,7 +81,7 @@ void Rtype::print_Rtype_machine_code(int opcode, int rd, int funct3, int rs1, in
     int machine_code = (funct7 << 25) + (rs2 << 20) + (rs1 << 15) + (funct3 << 12) + (rd << 7) + opcode;
 
     cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
-    
+
     char lower = (char)machine_code;
     char upper = (char)(machine_code >> 8);
     char upper2 = (char)(machine_code >> 16);

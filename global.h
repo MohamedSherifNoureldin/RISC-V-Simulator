@@ -190,3 +190,13 @@ int find_first_alphanum(string s)
     }
     return -1;
 }
+
+void update_register(int dest_reg, int value)
+{
+    if(dest_reg!=0)
+        registers[dest_reg] = value;
+    else
+    {
+        cout<<"Warning: trying to update x0"<<endl;
+    }
+}

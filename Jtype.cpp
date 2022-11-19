@@ -13,7 +13,7 @@ public:
 void Jtype::JAL(int rd, int imm)
 {
     // jal rd, imm
-    registers[rd] = PC + 4;
+    update_register(rd, PC + 4);
     PC = PC + imm;
 }
 void Jtype::print_Jtype_machine_code(int opcode, int rd, int imm)
