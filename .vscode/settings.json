@@ -1,7 +1,10 @@
 {
     "files.associations": {
-        "xstring": "cpp",
-        "iostream": "cpp",
-        "string": "cpp"
+        "*.tcc": "cpp",
+        "ostream": "cpp",
+        "iosfwd": "cpp",
+        "iomanip": "cpp",
+        "unordered_map": "cpp",
+        "bitset": "cpp"
     }
 }

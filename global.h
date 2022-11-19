@@ -3,6 +3,9 @@
 #include <unordered_map>
 #include <map>
 #include <iostream>
+#include <iomanip>
+#include <bitset>
+
 using namespace std;
 
 int registers[32];
@@ -12,16 +15,27 @@ unordered_map <string, int> labels;
 map <int, string> instructions;
 map <int, string> instructions_code;
 int PC;
-string convert_to_binary(int n, int bits){
-    string s = "";
-    while(n){
-        s = (n%2==0 ? "0" : "1") + s;
-        n /= 2;
+
+string convert_to_binary(int n, int bits)
+{
+    string binary;
+    if(bits==8)
+    {
+        binary = bitset<8>(n).to_string(); //to binary
+    } else {
+        binary = bitset<32>(n).to_string(); //to binary
     }
-    while(s.length() < bits)
-        s = "0" + s;
+    return binary;
+}
+
+string convert_to_hex(int n, int bits)
+{
+    stringstream stream;
+    stream << "0x" << setfill('0') << setw(bits/4) << hex << n;
+    string s(stream.str());
     return s;
 }
+
 void init_conventional_register() 
 {
     conventional_registers["zero"]= 0;
@@ -72,7 +86,7 @@ int parse_register(string reg)
     }
 }
 
-void print_registers()
+void print_registers_decimal()
 {
     for(int i=0; i<32; i++)
     {
@@ -80,10 +94,9 @@ void print_registers()
         if(i<31)
             cout<<", ";
     }
-    cout<<endl;
 }
 
-void print_memory()
+void print_memory_decimal()
 {
     for(auto i: memory)
     {
@@ -91,9 +104,90 @@ void print_memory()
     }
 }
 
+void print_updates_decimal()
+{
+    cout << "Registers: " << endl;
+    cout<<"PC = "<<PC<<endl;
+    print_registers_decimal();
+    cout<<endl;
+    cout<<"Memory: "<<endl;
+    print_memory_decimal();
+}
+
+void print_registers_binary()
+{
+    for(int i=0; i<32; i++)
+    {
+        cout<<"x"<<i<<" = "<<convert_to_binary(registers[i], 32);
+        if(i<31)
+            cout<<", ";
+    }
+    cout<<endl;
+}
+
+void print_memory_binary()
+{
+    for(auto i: memory)
+    {
+        cout<<i.first<<" = "<<convert_to_binary((int)(i.second), 8)<<", "<<endl;
+    }
+}
+
+void print_updates_binary()
+{
+    cout << "Registers: " << endl;
+    cout<<"PC = "<<convert_to_binary(PC,32)<<endl;
+    print_registers_binary();
+    cout<<"Memory: "<<endl;
+    print_memory_binary();
+}
+
+void print_registers_hex()
+{
+    for(int i=0; i<32; i++)
+    {
+        cout<<"x"<<i<<" = "<<convert_to_hex(registers[i], 32);
+        if(i<31)
+            cout<<", ";
+    }
+    cout<<endl;
+}
+
+void print_memory_hex()
+{
+    for(auto i: memory)
+    {
+        cout<<i.first<<" = "<<convert_to_hex((int)(i.second), 32)<<", "<<endl;
+    }
+}
+
+void print_updates_hex()
+{
+    cout << "Registers: " << endl;
+    cout<<"PC = "<<convert_to_hex(PC, 32)<<endl;
+    print_registers_hex();
+    cout<<"Memory: "<<endl;
+    print_memory_hex();
+}
+
 void print_updates()
 {
-    cout<<"PC = "<<PC<<endl;
-    print_registers();
-    print_memory();
+    cout<<"Decimal: "<<endl;
+    print_updates_decimal();
+    cout<<endl;
+    cout<<"Binary: "<<endl;
+    print_updates_binary();
+    cout<<endl;
+    cout<<"Hex: "<<endl;
+    print_updates_hex();
+}
+
+int find_first_alphanum(string s)
+{
+    for(int i=0; i<s.length(); i++)
+    {
+        if(isalnum(s[i]))
+            return i;
+    }
+    return -1;
 }

@@ -19,20 +19,22 @@ void Jtype::JAL(int rd, int imm)
 void Jtype::print_Jtype_machine_code(int opcode, int rd, int imm)
 {
 
-int first_imm= stoi(convert_to_binary(imm,20).substr(0,1));
-int second_imm= stoi(convert_to_binary(imm,20).substr(1,10));
-int third_imm= stoi(convert_to_binary(imm,20).substr(11,1));
-int fourth_imm= stoi(convert_to_binary(imm,20).substr(12,8));
-int machine_code = (first_imm<<31) | (second_imm<<21) | (third_imm<<20) | (fourth_imm<<12) | (rd<<7) | opcode;
-    string binary_codee1 = convert_to_binary(machine_code, 32).substr(0, 8);
-    string binary_codee2 = convert_to_binary(machine_code, 32).substr(8, 8);
-    string binary_codee3 = convert_to_binary(machine_code, 32).substr(16, 8);
-    string binary_codee4 = convert_to_binary(machine_code, 32).substr(24, 8);
+    int first_imm= stoi(convert_to_binary(imm,20).substr(0,1));
+    int second_imm= stoi(convert_to_binary(imm,20).substr(1,10));
+    int third_imm= stoi(convert_to_binary(imm,20).substr(11,1));
+    int fourth_imm= stoi(convert_to_binary(imm,20).substr(12,8));
+    int machine_code = (first_imm<<31) | (second_imm<<21) | (third_imm<<20) | (fourth_imm<<12) | (rd<<7) | opcode;
+    cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
 
-    instructions_code.insert({PC - 4, binary_codee4});
-    instructions_code.insert({PC - 3, binary_codee3});
-    instructions_code.insert({PC - 2, binary_codee2});
-    instructions_code.insert({PC - 1, binary_codee1});
+    char lower = (char)machine_code;
+    char upper = (char)(machine_code >> 8);
+    char upper2 = (char)(machine_code >> 16);
+    char upper3 = (char)(machine_code >> 24);
+
+    memory.insert({ PC, lower });
+    memory.insert({ PC + 1, upper });
+    memory.insert({ PC + 2, upper2 });
+    memory.insert({ PC + 3, upper3 });
 }
 
 #endif

@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -35,8 +34,9 @@ int main()
     cin>>pc_start;
     PC = pc_start;
     load_code(choice,pc_start);
-    for (auto i : instructions)
-        cout << i.first << " -> " << i.second << endl;
+
+    // for (auto i : instructions)
+    //     cout << i.first << " -> " << i.second << endl;
 
     // loading data to memory
     cout<<"Do you like to load data into memory from file? (y or n): ";
@@ -55,13 +55,21 @@ int main()
 
     // initializing registers to zeros
     for(int i=0; i<32; i++)
+    {
         registers[i] = 0;
+        if(i==2)
+            // init stack pointer
+            registers[i] = 0x7FFFFFFF;
+    }
+
+    cout<<endl;
 
     // parse code
     while(instructions.find(PC)!=instructions.end())
     {
         parse_code(PC);
         print_updates();
+        cout<<endl<<"-----------------------------------------------------"<<endl<<endl;
     }
 }
 
@@ -119,10 +127,12 @@ void load_code(string file, int start_pos)
         cout<<"Error: Code File couldn't be opened."<<endl;
     }
 }  
+
 void parse_code(int address) 
 {
     string line = instructions[address];
     cout<<"Running: "<<line<<endl;
+    line = line.substr(line.find_first_not_of(' '));
     string opcode = line.substr(0, line.find(' '));
     transform(opcode.begin(), opcode.end(), opcode.begin(), ::tolower);
     line = line.substr(line.find(' ')+1);
@@ -322,7 +332,6 @@ void parse_code(int address)
         line = line.substr(0, line.find(')')); // check this here
         rs1 = parse_register(line);
         Itype::LW(rd, rs1, imm);
-        cout<<"lw "<<rd<<", "<<imm<<"("<<rs1<<")"<<endl;
         Itype::print_Itype_machine_code(3, rd, 2, rs1, imm);
     }
     else if(opcode == "lbu")
@@ -357,7 +366,6 @@ void parse_code(int address)
         rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
         line = line.substr(line.find(',')+1);
         imm = stoi(line);
-        cout<<"addi "<<rd<<", "<<rs1<<", "<<imm<<endl;
         Itype::ADDI(rd, rs1, imm);
         Itype::print_Itype_machine_code(19, rd, 0, rs1, imm);
     }
@@ -521,7 +529,6 @@ void parse_code(int address)
         label = label.substr(label.find_first_not_of(' '));
         label = label.substr(0, label.find(' '));
         imm = labels[label] - PC;
-        cout << PC << "--------------" << labels[label] <<"---------------------------------" << imm << endl;
         Jtype::JAL(rd, imm);
         Jtype::print_Jtype_machine_code(111, rd, imm);
 
@@ -617,8 +624,19 @@ void parse_code(int address)
         Btype::BGEU(rs1, rs2, imm);
         Btype:: print_Btype_machine_code(99, rs1, rs2, 7,imm);
     }
-
-
-
-
+    else if (opcode == "ecall")
+    {
+        PC = (*instructions.end()).first;
+        Itype::print_Itype_machine_code(111, 0, 0, 0, 0);
+    }
+    else if (opcode == "ebreak")
+    {
+        PC = (*instructions.end()).first;
+        Itype::print_Itype_machine_code(111, 0, 0, 0, 1);
+    }
+    else if (opcode == "fence")
+    {
+        PC = (*instructions.end()).first;
+        cout<<"00000000000000000000000000001111"<<endl;
+    }
 }        

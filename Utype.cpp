@@ -27,18 +27,18 @@ void Utype::AUIPC(int rd, int imm)
 }
 void Utype::print_Utype_machine_code(int opcode, int rd, int imm)
 {
- int machine_code = (imm<<12) | (rd<<7) | opcode;
-  cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
-string binary_codee1=convert_to_binary(machine_code, 32).substr(0,8);
-string binary_codee2=convert_to_binary(machine_code, 32).substr(8,8);
-string binary_codee3=convert_to_binary(machine_code, 32).substr(16,8);
-string binary_codee4=convert_to_binary(machine_code, 32).substr(24,8);
+    int machine_code = (imm<<12) | (rd<<7) | opcode;
 
+    cout << "Machine code: " << convert_to_binary(machine_code, 32) << endl;
+    
+    char lower = (char)machine_code;
+    char upper = (char)(machine_code >> 8);
+    char upper2 = (char)(machine_code >> 16);
+    char upper3 = (char)(machine_code >> 24);
 
-
-instructions_code.insert({PC-4, binary_codee4});
-instructions_code.insert({PC-3, binary_codee3});
-instructions_code.insert({PC-2, binary_codee2});
-instructions_code.insert({PC-1, binary_codee1});
+    memory.insert({ PC, lower });
+    memory.insert({ PC + 1, upper });
+    memory.insert({ PC + 2, upper2 });
+    memory.insert({ PC + 3, upper3 });
 }
 #endif
