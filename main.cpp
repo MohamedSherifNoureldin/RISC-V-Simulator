@@ -33,7 +33,7 @@ int main()
     cout<<"Please input Program Start Address: ";
     cin>>pc_start;
     PC = pc_start;
-    load_code(choice,pc_start);
+    load_code(choice ,pc_start);
 
     // for (auto i : instructions)
     //     cout << i.first << " -> " << i.second << endl;
@@ -291,12 +291,13 @@ void parse_code(int address)
     }
     else if(opcode == "jalr")
     {
-        //jalr rd, 0(rs1)
+        //jalr rd, imm(rs1)
         int rs1, rd, imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         imm = stoi(line.substr(line.find_first_not_of(' '), line.find('(')));
-        line = line.substr(line.find('(')+1, line.find(')'));
+        line = line.substr(line.find('(')+1);
+        line = line.substr(0, line.find(')'));
         rs1 = parse_register(line);
         Itype::JALR(rd, rs1, imm);
         Itype::print_Itype_machine_code(103, rd, 0, rs1, imm);
@@ -539,18 +540,6 @@ void parse_code(int address)
         Jtype::print_Jtype_machine_code(111, rd, imm);
 
      }
-    else if (opcode == "jalr")
-    {
-        int rd, rs1; string label;
-        int imm;
-        rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
-        line = line.substr(line.find(',')+1);
-        imm = stoi(line.substr(line.find_first_not_of(' '), line.find('(')));
-        line = line.substr(line.find('(')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(')')));
-        Itype::JALR(rd, rs1, imm);
-        Itype::print_Itype_machine_code(111, rd, 0, rs1, imm);
-    }
     else if (opcode == "beq")
     {
         int rs1, rs2;
