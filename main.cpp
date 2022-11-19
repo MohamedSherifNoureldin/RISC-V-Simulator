@@ -112,6 +112,7 @@ void load_code(string file, int start_pos)
                     line = line.substr(line.find(':')+1);
                     if(line.find_first_not_of(' ') != std::string::npos)
                     {
+                        line = line.substr(find_first_alphanum(line));
                         instructions.insert(pair<int, string>(start_pos, line));
                         start_pos += 4;
                     }
@@ -132,7 +133,7 @@ void parse_code(int address)
 {
     string line = instructions[address];
     cout<<"Running: "<<line<<endl;
-    line = line.substr(line.find_first_not_of(' '));
+    line = line.substr(find_first_alphanum(line));
     string opcode = line.substr(0, line.find(' '));
     transform(opcode.begin(), opcode.end(), opcode.begin(), ::tolower);
     line = line.substr(line.find(' ')+1);
@@ -626,17 +627,17 @@ void parse_code(int address)
     }
     else if (opcode == "ecall")
     {
-        PC = (*instructions.end()).first;
+        PC = (*instructions.end()).first+4;
         Itype::print_Itype_machine_code(111, 0, 0, 0, 0);
     }
     else if (opcode == "ebreak")
     {
-        PC = (*instructions.end()).first;
+        PC = (*instructions.end()).first+4;
         Itype::print_Itype_machine_code(111, 0, 0, 0, 1);
     }
     else if (opcode == "fence")
     {
-        PC = (*instructions.end()).first;
+        PC = (*instructions.end()).first+4;
         cout<<"00000000000000000000000000001111"<<endl;
     }
 }        

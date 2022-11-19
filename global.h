@@ -13,7 +13,6 @@ map <int, char> memory;
 unordered_map <string, int> conventional_registers; 
 unordered_map <string, int> labels;
 map <int, string> instructions;
-map <int, string> instructions_code;
 int PC;
 
 string convert_to_binary(int n, int bits)
