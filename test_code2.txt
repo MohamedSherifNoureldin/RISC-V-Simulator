@@ -4,4 +4,6 @@ loop:
    bge  x3,x4, exit
    addi x3,x3,1
    jal x0,loop
-exit:
+exit: xor t2, x4, x0
+      xori t3, t2, 1
+      and x0, x3, x4
