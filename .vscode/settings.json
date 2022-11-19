@@ -5,6 +5,8 @@
         "iosfwd": "cpp",
         "iomanip": "cpp",
         "unordered_map": "cpp",
-        "bitset": "cpp"
+        "bitset": "cpp",
+        "string": "cpp",
+        "string_view": "cpp"
     }
 }

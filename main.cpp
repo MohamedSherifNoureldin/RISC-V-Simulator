@@ -48,6 +48,8 @@ int main()
         load_memory(choice);
         for (auto i : memory)
             cout << i.first << " -> " << (int)i.second << endl;
+        for(auto i : labels)
+            cout << i.first << " -> " << i.second << endl;
     }
 
     // initializing registers to zeros
@@ -100,7 +102,7 @@ void load_code(string file, int start_pos)
                 line = line.substr(0, i);
             }
             // check for empty lines (after removing comments)
-            if(line.find_first_not_of(' ') != std::string::npos) 
+            if(find_first_alphanum(line) != -1) 
             {
                 if (line.find(':') != string::npos)
                 {
@@ -109,16 +111,16 @@ void load_code(string file, int start_pos)
                     string label = line.substr(0, line.find(':'));
                     labels.insert(pair<string, int>(label, start_pos));
                     line = line.substr(line.find(':')+1);
-                    if(line.find_first_not_of(' ') != std::string::npos)
+                    if(find_first_alphanum(line) != -1)
                     {
-                        line = line.substr(find_first_alphanum(line));
+                        line = line.substr(find_first_alphanum(line), find_last_alphanum(line)+1);
                         instructions.insert(pair<int, string>(start_pos, line));
                         start_pos += 4;
                     }
                 }
                 else
                 {
-                    line = line.substr(find_first_alphanum(line));
+                    line = line.substr(find_first_alphanum(line), find_last_alphanum(line)+1);
                     instructions.insert(pair<int, string>(start_pos, line));
                     start_pos += 4;
                 }
@@ -142,7 +144,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -158,7 +160,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -173,7 +175,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -189,7 +191,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++){
@@ -204,7 +206,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -219,7 +221,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -234,7 +236,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -249,7 +251,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -264,7 +266,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -279,7 +281,7 @@ void parse_code(int address)
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')-1));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -363,14 +365,14 @@ void parse_code(int address)
         int rs1, rd;
         int imm;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
-        cout<<rd<<endl;
         line = line.substr(line.find(',')+1);
-        cout<<line<<endl;
-        cout<<line.substr(line.find_first_not_of(' '), line.find(',')-1)<<endl;
+        line = line.substr(find_first_alphanum(line));
+        cout<<line.substr(line.find_first_not_of(' '), line.find(','))<<endl;
         rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
         cout<<line<<endl;
         imm = stoi(line);
+        cout<<"addi "<<rd<<" "<<rs1<<" "<<imm<<endl;
         Itype::ADDI(rd, rs1, imm);
         Itype::print_Itype_machine_code(19, rd, 0, rs1, imm);
     }
@@ -556,12 +558,19 @@ void parse_code(int address)
         int rs1, rs2;
         string label;
         int imm;
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
+        cout<<"rs1 = "<<line.substr(find_first_alphanum(line), line.find(','))<<endl;
+        rs1 = parse_register(line.substr(find_first_alphanum(line), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs2 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
+        cout<<"rs2 = "<<line.substr(find_first_alphanum(line), line.find(',')-1)<<endl;
+        rs2 = parse_register(line.substr(find_first_alphanum(line), line.find(',')-1));
         label =line.substr(line.find(',')+1);
-        label = label.substr(find_first_alphanum(label), find_last_alphanum(label)+1);
+        label = label.substr(find_first_alphanum(label), find_last_alphanum(label));
+        for(int i=0; i<label.length(); i++)
+            cout<<(int)label[i]<<endl;
         imm = labels[label] - PC;
+        cout<<label<<endl;
+        cout<<labels[label]<<endl;
+        cout<<"beq "<<rs1<<", "<<rs2<<", "<<imm<<endl;
         Btype::BEQ(rs1, rs2, imm);
         Btype::print_Btype_machine_code(99, rs1,rs2,0,imm);
 

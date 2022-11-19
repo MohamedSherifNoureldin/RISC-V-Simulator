@@ -1,0 +1,121 @@
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Sat Nov 19 00:12:57 2022 +0200
+
+    fixed label substring, error with jal using labels, does not properly update PC leading to infinite instruction execution
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Fri Nov 18 20:10:06 2022 +0200
+
+    fixed error with memory file loading and printing, fixed Stype instructions after testing
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Fri Nov 18 20:09:14 2022 +0200
+
+    fixed error with memory file loading and printing, fixed Stype instructions after testing
+
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Fri Nov 18 02:31:55 2022 +0200
+
+    dn with binary functions
+
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Fri Nov 18 01:56:46 2022 +0200
+
+    added the machine code part (B and J types are not 100% dn yet)
+
+
+Merge: 1a100b4 1defe9b
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Thu Nov 17 22:46:56 2022 +0200
+
+    Merge branch 'main' of https://github.com/MohamedSherifNoureldin/RISC-V-Simulator
+
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Thu Nov 17 22:36:17 2022 +0200
+
+    .
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Thu Nov 17 13:35:48 2022 +0200
+
+    added BType instructions
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Thu Nov 17 13:23:57 2022 +0200
+
+    added J, U, and S type instructions, added some jumping and B type instructions but still under revision
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 20:09:45 2022 +0200
+
+    fixed shifting error, added #includeguards for Itype class
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 20:03:46 2022 +0200
+
+    added S-type instruction functions
+
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Wed Nov 16 19:43:20 2022 +0200
+
+    rtype
+
+Merge: 18bbd93 a449702
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Wed Nov 16 19:16:33 2022 +0200
+
+    Merge branch 'main' of https://github.com/MohamedSherifNoureldin/RISC-V-Simulator
+
+
+Merge: e3871c4 03a42a7
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 19:11:18 2022 +0200
+
+    Merge branch 'main' of https://github.com/MohamedSherifNoureldin/RISC-V-Simulator
+
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 19:00:45 2022 +0200
+
+    added #include guards for header files
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 18:55:14 2022 +0200
+
+    added comments and labels unordered_map
+
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 18:40:43 2022 +0200
+
+    added B-Type instruction functions, fixed variable types in global.h
+
+Merge: 0108799 d51dbe4
+Author: saraa-mohamedd <sara_mohamed@aucegypt.edu>
+Date:   Wed Nov 16 16:20:56 2022 +0200
+
+    Merge branch 'main' of https://github.com/MohamedSherifNoureldin/RISC-V-Simulator
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Thu Nov 10 02:08:47 2022 +0200
+
+    added global.h
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Wed Nov 9 20:06:28 2022 +0200
+
+    added the function convert_registers
+
+Author: Roaabahaa <90260872+Roaabahaa@users.noreply.github.com>
+Date:   Wed Nov 9 19:23:25 2022 +0200
+
+    added the function init_conventional_registers

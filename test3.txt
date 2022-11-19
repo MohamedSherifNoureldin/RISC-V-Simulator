@@ -1,0 +1,10 @@
+addi a1, zero, 5
+addi a0, zero, 1000
+addi t0,zero,0
+addi t5, zero, 10
+L1:
+    slli t1,t0,2
+    add t2,a0,t1
+    sw zero, 0(t2)
+    addi t0,t0,1
+    blt t0,t5,L1

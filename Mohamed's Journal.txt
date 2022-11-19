@@ -1,0 +1,64 @@
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Tue Nov 8 21:21:32 2022 +0200
+
+    Created the github repo & the initial starting files after conducting a meeting discussing what data types to use.
+
+Author: Mohamed Sherif Hazem <mohamedsherifhazem@gmail.com>
+Date:   Tue Nov 8 21:23:11 2022 +0200
+
+    Created a class for every Instruction family. Created the load memory function. Created the registers and memory data structures. 
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Wed Nov 16 16:19:38 2022 +0200
+
+    Fixed some problems in global.h.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Wed Nov 16 19:05:04 2022 +0200
+
+    Worked with the group on creating the functions in each class. Started working on the parse code function by adding support for Itype instructions.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Wed Nov 16 20:17:30 2022 +0200
+
+    Added support for Utype & Jtype instructions. Fixed Stype class so that functions are public.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Thu Nov 17 12:01:18 2022 +0200
+
+    Solved a problem in including multiple classes by combining .h and .cpp files. Fixed some bugs in the code parsing and added the PC with its functionality.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Thu Nov 17 13:03:19 2022 +0200
+
+    Added support for U & S & remaining I instructions in the code parsing function.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Thu Nov 17 17:29:29 2022 +0200
+
+    Fixed some bugs in the error parsing function that were due to inconsistent spaces. Added support for inline and seperate line comments in the code.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Sat Nov 19 18:33:15 2022 +0200
+
+    Added printing of hex & binary along with decimal after each execution. Fixed parsing errors due to extraspaces. Fixed decimal to binary converting function to support negative decimal values.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Sat Nov 19 18:52:43 2022 +0200
+
+    Fixed another parsing error that was due to inconsistent punctuation.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Sat Nov 19 19:16:07 2022 +0200
+
+    Added Btype PC increment in case of false condition that was previously forgotten. Removed extra -1 in substring of Itype instructions parsing.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Sat Nov 19 19:49:55 2022 +0200
+
+    Modified the code so that the x0 (zero) register is fixed to 0.
+
+Author: MohamedSherifNoureldin <mohamedsherifhazem@gmail.com>
+Date:   Sat Nov 19 20:41:06 2022 +0200
+
+    Tried different test cases and fixed a minor bug in code parsing. 
