@@ -35,11 +35,11 @@ int main()
     PC = pc_start;
     load_code(choice ,pc_start);
 
-    // for (auto i : instructions)
-    //     cout << i.first << " -> " << i.second << endl;
+     for (auto i : instructions)
+         cout << i.first << " -> " << i.second << endl;
 
     // loading data to memory
-    cout<<"Do you like to load data into memory from file? (y or n): ";
+    cout<<"Would you like to load data into memory from file? (y or n): ";
     cin>>choice;
     if(choice=="y")
     {
@@ -157,10 +157,11 @@ void parse_code(int address)
     }
     else if (opcode == "sub")
     {
+        // sub rd, rs1, rs2
         int rs1, rs2, rd;
         rd = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
         line = line.substr(line.find(',')+1);
-        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',')));
+        rs1 = parse_register(line.substr(line.find_first_not_of(' '), line.find(',') - 1));
         line = line.substr(line.find(',')+1);
         string temp = "";
         for(int i=0; i<line.length(); i++)
@@ -636,17 +637,20 @@ void parse_code(int address)
     }
     else if (opcode == "ecall")
     {
-        PC = (*instructions.end()).first+4;
+        PC = ((*instructions.end()).first)+4;
         Itype::print_Itype_machine_code(111, 0, 0, 0, 0);
+        abort();
     }
     else if (opcode == "ebreak")
     {
-        PC = (*instructions.end()).first+4;
+        PC = ((*instructions.end()).first)+4;
         Itype::print_Itype_machine_code(111, 0, 0, 0, 1);
+        abort();
     }
     else if (opcode == "fence")
     {
-        PC = (*instructions.end()).first+4;
+        PC = ((*instructions.end()).first)+4;
         cout<<"00000000000000000000000000001111"<<endl;
+        abort();
     }
 }        

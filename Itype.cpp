@@ -37,7 +37,13 @@ void Itype::LH(int rd, int rs1, int imm)
 {
     // lh rd, imm(rs1)
     if(memory.find(registers[rs1] + imm)!=memory.end())
-        update_register(rd, (short int)memory[registers[rs1] + imm]);
+    {
+        int temp = (char)memory[registers[rs1] + imm];
+        char temp2 = (char)memory[registers[rs1] + imm + 1];
+        short int temp3 = (temp << 8) | temp2;
+        update_register(rd, temp3);
+    }
+ 
     else
         update_register(rd, 0);
     PC += 4;
@@ -57,7 +63,16 @@ void Itype::LW(int rd, int rs1, int imm)
 {
     // lw rd, imm(rs1)
     if(memory.find(registers[rs1] + imm)!=memory.end())
-        update_register(rd, memory[registers[rs1] + imm]);
+    {
+        int temp = (char)memory[registers[rs1] + imm];
+        char temp2 = (char)memory[registers[rs1] + imm + 1];
+        short int temp3 = (temp << 8) | temp2;
+        int temp4 = (char)memory[registers[rs1] + imm];
+        char temp5 = (char)memory[registers[rs1] + imm + 1];
+        short int temp6 = (temp4 << 8) | temp5;
+        int temp7 = (temp3) | temp6;       
+        update_register(rd, temp7);
+    }
     else
         update_register(rd, 0);
     PC += 4;
@@ -77,7 +92,12 @@ void Itype::LHU(int rd, int rs1, int imm)
 {
     // lh rd, imm(rs1)
     if(memory.find(registers[rs1] + imm)!=memory.end())
-        update_register(rd, (unsigned short int)memory[registers[rs1] + imm]);
+    {
+        int temp = (unsigned char)memory[registers[rs1] + imm];
+        unsigned char temp2 = (unsigned char)memory[registers[rs1] + imm + 1];
+        unsigned short int temp3 = (temp << 8) | temp2;
+        update_register(rd, temp3);
+    }
     else
         update_register(rd, 0);
     PC += 4;
