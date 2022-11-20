@@ -38,9 +38,9 @@ void Itype::LH(int rd, int rs1, int imm)
     // lh rd, imm(rs1)
     if(memory.find(registers[rs1] + imm)!=memory.end())
     {
-        int temp = (char)memory[registers[rs1] + imm];
+        char temp = (char)memory[registers[rs1] + imm];
         char temp2 = (char)memory[registers[rs1] + imm + 1];
-        short int temp3 = (temp << 8) | temp2;
+        int temp3 = (temp2 << 8) | temp;
         update_register(rd, temp3);
     }
  
@@ -64,13 +64,13 @@ void Itype::LW(int rd, int rs1, int imm)
     // lw rd, imm(rs1)
     if(memory.find(registers[rs1] + imm)!=memory.end())
     {
-        int temp = (char)memory[registers[rs1] + imm];
+        char temp = (char)memory[registers[rs1] + imm];
         char temp2 = (char)memory[registers[rs1] + imm + 1];
-        short int temp3 = (temp << 8) | temp2;
-        int temp4 = (char)memory[registers[rs1] + imm];
-        char temp5 = (char)memory[registers[rs1] + imm + 1];
-        short int temp6 = (temp4 << 8) | temp5;
-        int temp7 = (temp3) | temp6;       
+        unsigned short int temp3 = (temp2 << 8) | temp;
+        char temp4 = (char)memory[registers[rs1] + imm + 2];
+        char temp5 = (char)memory[registers[rs1] + imm + 3];
+        short int temp6 = (temp5 << 8) | temp4;
+        int temp7 = (temp6<<16) | temp3;       
         update_register(rd, temp7);
     }
     else
@@ -93,9 +93,9 @@ void Itype::LHU(int rd, int rs1, int imm)
     // lh rd, imm(rs1)
     if(memory.find(registers[rs1] + imm)!=memory.end())
     {
-        int temp = (unsigned char)memory[registers[rs1] + imm];
+        unsigned char temp = (unsigned char)memory[registers[rs1] + imm];
         unsigned char temp2 = (unsigned char)memory[registers[rs1] + imm + 1];
-        unsigned short int temp3 = (temp << 8) | temp2;
+        unsigned short int temp3 = (temp2 << 8) | temp;
         update_register(rd, temp3);
     }
     else

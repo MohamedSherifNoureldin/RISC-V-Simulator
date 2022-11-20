@@ -8,6 +8,7 @@ exit: xor t2, x4, x0
       xori t3, t2, 1
       and x0, x3, x4
 addi t1, x0, 32768 
+addi x4,x0,1000
 lh t1, 4(x4)
 lhu t1, 4(x4)
 lw t1, 4(x4)

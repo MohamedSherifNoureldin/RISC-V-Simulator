@@ -156,7 +156,7 @@ void print_memory_hex()
 {
     for(auto i: memory)
     {
-        cout<<i.first<<" = "<<convert_to_hex((int)(i.second), 32)<<", "<<endl;
+        cout<<i.first<<" = "<<convert_to_hex((int)(i.second), 8)<<", "<<endl;
     }
 }
 

@@ -81,7 +81,7 @@ void load_memory(string file)
     if ( memory_file.is_open() ) {
         while ( memory_file ) {
             memory_file>>key; memory_file>>value;
-            memory[stoi(key)] = stoi(value);
+            memory[stoi(key)] = (char)(stoi(value));
         }
     } else {
         cout<<"Error: Memory File couldn't be opened."<<endl;
